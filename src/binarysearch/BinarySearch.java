@@ -1,7 +1,7 @@
 package binarysearch;
 
 /**
- * {@link: <a href="https://leetcode.com/problems/binary-search/description/">...</a>}
+ * {@link <a href="https://leetcode.com/problems/binary-search/description/">...</a>}
  * */
 
 public class BinarySearch {
