@@ -12,4 +12,6 @@ public interface BinaryTree {
     void preOrderTraversal(Node node);
 
     void postOrderTraversal(Node node);
+
+    void levelOrderTraversal(Node node);
 }

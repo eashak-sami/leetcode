@@ -45,13 +45,20 @@ public class Main {
         tree.postOrderTraversal(root);
         System.out.println();
 
+        System.out.println("***************Level order traversal***************");
+        tree.levelOrderTraversal(root);
+        System.out.println();
+
         System.out.println("***********Delete Node Without any child***********");
         tree.delete(root, 11);
+        System.out.println();
 
         System.out.println("*****Delete Node With only left or right child*****");
         tree.delete(root, 7);
+        System.out.println();
 
         System.out.println("*****Delete Node With both left and right child*****");
         tree.delete(root, 15);
+        System.out.println();
     }
 }

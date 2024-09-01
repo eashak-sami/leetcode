@@ -1,5 +1,8 @@
 package learnings.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTreeImpl implements BinaryTree {
 
     /**
@@ -14,6 +17,41 @@ public class BinaryTreeImpl implements BinaryTree {
         if (key < root.key) root.left = insert(root.left, key);
         else root.right = insert(root.right, key);
 
+        return root;
+    }
+
+    @Override
+    public Node delete(Node root, int key) {
+        if (root == null) {
+            return null;
+        } else if (key < root.key) {
+            root.left = delete(root.left, key);
+        } else if (key > root.key) {
+            root.right = delete(root.right, key);
+        } else {
+            if (root.left == null && root.right == null) {
+                root = null;
+            } else if (root.left == null) {
+                Node temp = root;
+                root = root.right;
+                temp = null;
+            } else if (root.right == null) {
+                Node temp = root;
+                root = root.left;
+                temp = null;
+            } else {
+                Node temp = findMin(root.right);
+                root.key = temp.key;
+                root.right = delete(root.right, temp.key);
+            }
+        }
+        return root;
+    }
+
+    public Node findMin(Node root) {
+        while (root.left != null) {
+            root = root.left;
+        }
         return root;
     }
 
@@ -60,37 +98,22 @@ public class BinaryTreeImpl implements BinaryTree {
     }
 
     @Override
-    public Node delete(Node root, int key) {
-        if (root == null) {
-            return null;
-        } else if (key < root.key) {
-            root.left = delete(root.left, key);
-        } else if (key > root.key) {
-            root.right = delete(root.right, key);
-        } else {
-            if (root.left == null && root.right == null) {
-                root = null;
-            } else if (root.left == null) {
-                Node temp = root;
-                root = root.right;
-                temp = null;
-            } else if (root.right == null) {
-                Node temp = root;
-                root = root.left;
-                temp = null;
-            } else {
-                Node temp = findMin(root.right);
-                root.key = temp.key;
-                root.right = delete(root.right, temp.key);
+    public void levelOrderTraversal(Node node) {
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.print(current.key + " ");
+
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+
+            if (current.right != null) {
+                queue.add(current.right);
             }
         }
-        return root;
-    }
-
-    public Node findMin(Node root) {
-        while (root.left != null) {
-            root = root.left;
-        }
-        return root;
     }
 }
