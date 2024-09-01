@@ -1,5 +1,9 @@
 package tree;
 
+/**
+ * {@link: <a href="https://leetcode.com/problems/invert-binary-tree/description/">Invert binary tree</a>}
+ * */
+
 public class InvertBinaryTree {
     public TreeNode invertTree(TreeNode root) {
         if(root == null) return null;

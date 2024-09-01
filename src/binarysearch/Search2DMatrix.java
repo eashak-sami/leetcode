@@ -1,7 +1,7 @@
 package binarysearch;
 
 /**
- * {@link: <a href="https://leetcode.com/problems/search-a-2d-matrix/description/">...</a>}
+ * {@link: <a href="https://leetcode.com/problems/search-a-2d-matrix/description/">search in 2d matrix</a>}
  * */
 
 public class Search2DMatrix {
