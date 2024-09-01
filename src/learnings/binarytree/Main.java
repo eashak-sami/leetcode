@@ -21,5 +21,17 @@ public class Main {
         root = tree.insert(root, 80);
 
         System.out.println(tree.search(root, 70) != null ? "Found" : "Not found");
+
+        System.out.println("*****************In Order Traversal*****************");
+        tree.inOrderTraversal(root);
+        System.out.println();
+
+        System.out.println("****************Pre Order Traversal****************");
+        tree.preOrderTraversal(root);
+        System.out.println();
+
+        System.out.println("****************Post Order Traversal****************");
+        tree.postOrderTraversal(root);
+        System.out.println();
     }
 }

@@ -8,22 +8,17 @@ public class BinaryTreeImpl implements BinaryTree{
     public Node insert(Node root, int key)
     {
 
-        // If the tree is empty, return a new node
         if (root == null)
             return new Node(key);
 
-        // If the key is already present in the tree,
-        // return the node
         if (root.key == key)
             return root;
 
-        // Otherwise, recur down the tree
         if (key < root.key)
             root.left = insert(root.left, key);
         else
             root.right = insert(root.right, key);
 
-        // Return the (unchanged) node pointer
         return root;
     }
 
@@ -32,11 +27,42 @@ public class BinaryTreeImpl implements BinaryTree{
         if (root == null || root.key == key)
             return root;
 
-        // Key is greater than root's key
         if (root.key < key)
             return search(root.right, key);
 
-        // Key is smaller than root's key
         return search(root.left, key);
+    }
+
+    @Override
+    public void inOrderTraversal(Node node) {
+        if(node == null) return;
+
+        inOrderTraversal(node.left);
+
+        System.out.print(node.key + " ");
+
+        inOrderTraversal(node.right);
+    }
+
+    @Override
+    public void preOrderTraversal(Node node) {
+        if(node == null) return;
+
+        System.out.print(node.key + " ");
+
+        preOrderTraversal(node.left);
+
+        preOrderTraversal(node.right);
+    }
+
+    @Override
+    public void postOrderTraversal(Node node) {
+        if(node == null) return;
+
+        postOrderTraversal(node.left);
+
+        postOrderTraversal(node.right);
+
+        System.out.print(node.key + " ");
     }
 }
