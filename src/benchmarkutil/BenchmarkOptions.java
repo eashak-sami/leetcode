@@ -2,7 +2,6 @@ package benchmarkutil;
 
 /**
  * BenchmarkOptions - configuration for benchmarking.
- *
  * Fields:
  * <ul>
  *   <li>warmupIters: iterations for JIT warmup (not measured)</li>

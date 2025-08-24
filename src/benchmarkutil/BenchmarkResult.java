@@ -2,7 +2,6 @@ package benchmarkutil;
 
 /**
  * BenchmarkResult - holds statistics of a benchmarked task.
- *
  * Fields:
  * <ul>
  *   <li>name: descriptive benchmark name</li>

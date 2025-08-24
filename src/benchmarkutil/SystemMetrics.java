@@ -6,12 +6,6 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.ThreadMXBean;
 import java.util.List;
 
-import java.lang.management.GarbageCollectorMXBean;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.lang.management.ThreadMXBean;
-import java.util.List;
-
 /**
  * SystemMetrics - helper to read JVM-level metrics.
  * Tracks:
@@ -29,20 +23,24 @@ final class SystemMetrics {
 
     SystemMetrics() {
         com.sun.management.ThreadMXBean candidate = null;
-        try { candidate = ManagementFactory.getPlatformMXBean(com.sun.management.ThreadMXBean.class); }
-        catch (Throwable ignored) {}
+        try {
+            candidate = ManagementFactory.getPlatformMXBean(com.sun.management.ThreadMXBean.class);
+        } catch (Throwable ignored) {
+        }
         this.sunThreadMxBean = candidate;
 
         try {
             if (threadMxBean.isCurrentThreadCpuTimeSupported() && !threadMxBean.isThreadCpuTimeEnabled())
                 threadMxBean.setThreadCpuTimeEnabled(true);
-        } catch (Throwable ignored) {}
+        } catch (Throwable ignored) {
+        }
 
         if (sunThreadMxBean != null) {
             try {
                 if (!sunThreadMxBean.isThreadAllocatedMemoryEnabled())
                     sunThreadMxBean.setThreadAllocatedMemoryEnabled(true);
-            } catch (Throwable ignored) {}
+            } catch (Throwable ignored) {
+            }
         }
     }
 
@@ -69,26 +67,38 @@ final class SystemMetrics {
     }
 
     boolean cpuTimeSupported() {
-        try { return threadMxBean.isCurrentThreadCpuTimeSupported(); }
-        catch (Throwable t) { return false; }
+        try {
+            return threadMxBean.isCurrentThreadCpuTimeSupported();
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     long threadCpuTimeNs() {
         try {
             if (!cpuTimeSupported()) return -1L;
             return threadMxBean.getCurrentThreadCpuTime();
-        } catch (Throwable t) { return -1L; }
+        } catch (Throwable t) {
+            return -1L;
+        }
     }
 
     boolean threadAllocSupported() {
-        try { return sunThreadMxBean != null && sunThreadMxBean.isThreadAllocatedMemoryEnabled(); }
-        catch (Throwable t) { return false; }
+        try {
+            return sunThreadMxBean != null && sunThreadMxBean.isThreadAllocatedMemoryEnabled();
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     long threadAllocatedBytes(long tid) {
         if (sunThreadMxBean == null) return -1L;
-        try { long v = sunThreadMxBean.getThreadAllocatedBytes(tid); return v < 0 ? -1 : v; }
-        catch (Throwable t) { return -1L; }
+        try {
+            long v = sunThreadMxBean.getThreadAllocatedBytes(tid);
+            return v < 0 ? -1 : v;
+        } catch (Throwable t) {
+            return -1L;
+        }
     }
 
     static long getUsedMemory() {
